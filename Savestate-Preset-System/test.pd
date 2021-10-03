@@ -1,0 +1,348 @@
+#N canvas 26 38 863 714 10;
+#N canvas 545 40 625 644 savestate 0;
+#X obj 285 258 savestate;
+#X obj 336 278 array get \$0-test;
+#X obj 285 306 array set \$0-test;
+#X obj 25 15 loadbang;
+#X obj 45 60 s \$0-preset-size;
+#X obj 264 602 array set \$0-test;
+#X obj 285 455 r \$0-copy;
+#X obj 264 582 list;
+#X obj 334 566 t b f;
+#N canvas 38 283 655 495 load-save-copy-handling 0;
+#X obj 93 383 s \$0-preset;
+#X text 23 362 Preset size;
+#X obj 349 163 r \$0-copy;
+#X msg 349 184 1;
+#N canvas 528 23 450 300 color 0;
+#X obj 61 177 pack 0 0 0;
+#X obj 61 149 f;
+#X msg 61 202 color \$1 \$2 \$3;
+#X text 50 130 Back;
+#X text 93 161 Front;
+#X text 153 161 Label;
+#X obj 61 223 outlet;
+#X obj 61 11 inlet;
+#X obj 61 96 t b b b b;
+#X obj 26 81 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 61 53 sel 0 1;
+#X obj 251 161 f;
+#X text 240 140 Back;
+#X text 283 161 Front;
+#X text 363 161 Label;
+#X obj 251 96 t b b b b;
+#X msg 78 129 0;
+#X msg 268 140 3;
+#X msg 127 161 3;
+#X msg 187 161 22;
+#X obj 251 72 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 397 161 22;
+#X msg 317 161 0;
+#X text 187 97 Copy color;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 6 0;
+#X connect 7 0 10 0;
+#X connect 8 0 1 0;
+#X connect 8 1 16 0;
+#X connect 8 2 18 0;
+#X connect 8 3 19 0;
+#X connect 9 0 8 0;
+#X connect 10 0 8 0;
+#X connect 10 1 15 0;
+#X connect 11 0 0 0;
+#X connect 15 0 11 0;
+#X connect 15 1 17 0;
+#X connect 15 2 22 0;
+#X connect 15 3 21 0;
+#X connect 16 0 1 1;
+#X connect 17 0 11 1;
+#X connect 18 0 0 1;
+#X connect 19 0 0 2;
+#X connect 20 0 15 0;
+#X connect 21 0 0 2;
+#X connect 22 0 0 1;
+#X restore 386 216 pd color;
+#X msg 310 101 0;
+#X floatatom 263 247 5 0 0 0 - - -;
+#X obj 310 200 f;
+#X obj 253 346 f;
+#X floatatom 253 367 5 0 0 0 - - -;
+#X obj 226 85 t b f;
+#X obj 310 330 t f f;
+#X obj 352 330 r \$0-preset-size;
+#X obj 337 351 *;
+#X obj 93 362 *;
+#X obj 108 330 r \$0-preset-size;
+#X text 108 45 Preset parameter in;
+#X text 385 257 Change color on preset parameter when in copy mode.
+, f 19;
+#X text 336 389 Copy to this preset and then select the newly copied
+preset from the new slot., f 24;
+#X text 33 225 Use preset radio for copy preset too;
+#X obj 310 79 loadbang;
+#X obj 337 371 s \$0-copy-to;
+#X obj 226 45 r \$0-s-0-param;
+#X obj 386 236 s \$0-r-0-param;
+#X text 60 102 When preset is copied \, turn copy mode off;
+#X text 111 164 Turn copy mode on before copying preset;
+#N canvas 0 23 384 263 demux-2 0;
+#X obj 128 157 spigot;
+#X obj 161 94 == 0;
+#X obj 198 157 spigot;
+#X obj 231 94 == 1;
+#X obj 128 179 outlet;
+#X obj 198 179 outlet;
+#X obj 51 141 inlet value;
+#X obj 289 78 inlet select;
+#X connect 0 0 4 0;
+#X connect 1 0 0 1;
+#X connect 2 0 5 0;
+#X connect 3 0 2 1;
+#X connect 6 0 0 0;
+#X connect 6 0 2 0;
+#X connect 7 0 1 0;
+#X connect 7 0 3 0;
+#X restore 253 226 pd demux-2;
+#X connect 2 0 3 0;
+#X connect 3 0 7 0;
+#X connect 4 0 23 0;
+#X connect 5 0 7 0;
+#X connect 7 0 4 0;
+#X connect 7 0 26 1;
+#X connect 8 0 9 0;
+#X connect 8 0 14 0;
+#X connect 10 0 5 0;
+#X connect 10 1 26 0;
+#X connect 11 0 8 0;
+#X connect 11 1 13 0;
+#X connect 12 0 13 1;
+#X connect 13 0 21 0;
+#X connect 14 0 0 0;
+#X connect 15 0 14 1;
+#X connect 20 0 5 0;
+#X connect 22 0 10 0;
+#X connect 26 0 6 0;
+#X connect 26 0 8 0;
+#X connect 26 1 11 0;
+#X restore 285 386 pd load-save-copy-handling;
+#X text 152 279 Save values \, when saving patch;
+#X obj 285 525 array get \$0-test;
+#X obj 334 546 r \$0-copy-to;
+#X obj 334 503 r \$0-preset-size;
+#X obj 300 479 r \$0-preset;
+#X obj 285 504 f;
+#X obj 25 83 * 8;
+#X text 179 347 Table for storage;
+#X text 101 306 Load values when loading patch;
+#X text 191 386 Preset handling;
+#X obj 25 154 array size \$0-test;
+#X obj 285 346 array define \$0-test;
+#X text 283 213 Load data on start up and save it using a table and
+savestave., f 26;
+#X text 161 455 Copy preset function;
+#X msg 25 36 8;
+#X obj 25 104 + 1;
+#X text 55 83 <<< How many presets. I use 8 presets \, so this is times
+8;
+#X text 55 37 <<< Set how many parameters in a preset.;
+#X floatatom 25 175 5 0 0 1 - - -;
+#X obj 25 125 t b f;
+#X text 64 175 <<< Table size in total;
+#X text 54 104 <<< An extra index for the preset selecter.;
+#X connect 0 0 2 0;
+#X connect 0 1 1 0;
+#X connect 1 0 0 0;
+#X connect 3 0 24 0;
+#X connect 6 0 15 0;
+#X connect 7 0 5 0;
+#X connect 8 0 7 0;
+#X connect 8 1 5 1;
+#X connect 11 0 7 1;
+#X connect 12 0 8 0;
+#X connect 13 0 11 1;
+#X connect 14 0 15 1;
+#X connect 15 0 11 0;
+#X connect 16 0 25 0;
+#X connect 20 0 28 0;
+#X connect 24 0 4 0;
+#X connect 24 0 16 0;
+#X connect 25 0 29 0;
+#X connect 29 0 20 0;
+#X connect 29 1 20 0;
+#X restore 16 14 pd savestate;
+#X obj 158 173 nbx 5 14 -1e+37 1e+37 0 0 \$0-s-1-param \$0-r-1-param
+empty 0 -8 0 10 -262144 -1 -1 7 256;
+#X obj 158 156 hradio 12 1 0 8 \$0-s-0-param \$0-r-0-param Preset 2
+6 0 10 -262144 -261689 -1 0;
+#X obj 242 173 bng 12 250 50 0 \$0-save empty S 4 7 0 8 -262144 -1
+-1;
+#X obj 158 106 loadbang;
+#X obj 242 190 bng 12 250 50 0 \$0-copy empty C 4 7 0 8 -262144 -1
+-1;
+#X obj 158 127 del 50;
+#X text 563 72 \$0-s-0-param;
+#X text 563 92 \$0-r-0-param;
+#X obj 158 191 nbx 5 14 -1e+37 1e+37 0 0 \$0-s-2-param \$0-r-2-param
+empty 0 -8 0 10 -262144 -1 -1 47 256;
+#X obj 158 209 nbx 5 14 -1e+37 1e+37 0 0 \$0-s-3-param \$0-r-3-param
+empty 0 -8 0 10 -262144 -1 -1 87 256;
+#X obj 158 227 nbx 5 14 -1e+37 1e+37 0 0 \$0-s-4-param \$0-r-4-param
+empty 0 -8 0 10 -262144 -1 -1 241 256;
+#X floatatom 25 550 5 0 0 0 - - -;
+#X floatatom 125 550 5 0 0 0 - - -;
+#X floatatom 225 550 5 0 0 0 - - -;
+#X floatatom 325 550 5 0 0 0 - - -;
+#X obj 25 529 r \$0-s-1-param;
+#X obj 125 529 r \$0-s-2-param;
+#X obj 225 529 r \$0-s-3-param;
+#X obj 325 529 r \$0-s-4-param;
+#X text 503 72 Send;
+#X text 503 92 Receive;
+#X text 503 122 Send;
+#X text 503 142 Receive;
+#X text 563 122 \$0-s-1-param;
+#X text 563 142 \$0-r-1-param;
+#X text 503 172 Send;
+#X text 503 192 Receive;
+#X text 563 172 \$0-s-2-param;
+#X text 563 192 \$0-r-2-param;
+#N canvas 782 111 486 381 parameters 0;
+#X text 54 26 Parameter handling abstractions:;
+#X obj 57 129 param-savestate \$0 1;
+#X obj 57 149 param-savestate \$0 2;
+#X obj 57 169 param-savestate \$0 3;
+#X obj 57 189 param-savestate \$0 4;
+#X text 187 130 Param 1;
+#X text 187 150 Param 2;
+#X text 187 170 Param 3;
+#X text 187 190 Param 4;
+#X text 187 110 Param 0;
+#X text 247 110 Preset - Fixed parameter;
+#X text 247 130 None;
+#X text 247 150 None;
+#X text 247 170 None;
+#X text 247 190 None;
+#X obj 57 209 param-savestate \$0 5;
+#X obj 57 229 param-savestate \$0 6;
+#X obj 57 249 param-savestate \$0 7;
+#X obj 57 269 param-savestate \$0 8;
+#X text 247 210 None;
+#X text 247 230 None;
+#X text 247 250 None;
+#X text 247 270 None;
+#X text 187 210 Param 5;
+#X text 187 230 Param 6;
+#X text 187 250 Param 7;
+#X text 187 270 Param 8;
+#N canvas 0 23 627 390 preset-indexxxx-0 0;
+#X obj 159 249 tabread \$0-test;
+#X obj 159 111 loadbang;
+#X msg 159 226 0;
+#X obj 286 242 tabwrite \$0-test;
+#X obj 286 210 spigot;
+#X msg 319 147 1;
+#X obj 286 180 r \$0-s-0-param;
+#X obj 159 279 s \$0-r-0-param;
+#X text 157 61 Preset select is fixed to index 0 and does not use the
+preset system \, its a fixed parameter. Its just recalled on startup.
+;
+#X obj 319 127 del 25;
+#X text 23 225 Index for preset radio;
+#X text 157 301 Recall the stored preset from savestate/table., f
+17;
+#X text 391 126 Do not let the preset radio set a value to the table
+before the preset radio value has actually been set from savestate.
+It wont work \, hence the spigot and delay., f 33;
+#X text 287 262 Save the preset to savestate/table., f 19;
+#X connect 0 0 7 0;
+#X connect 1 0 2 0;
+#X connect 1 0 9 0;
+#X connect 2 0 0 0;
+#X connect 2 0 3 1;
+#X connect 4 0 3 0;
+#X connect 5 0 4 1;
+#X connect 6 0 4 0;
+#X connect 9 0 5 0;
+#X restore 57 109 pd preset-indexxxx-0;
+#X text 54 46 - Create one for each param \, with the right index nr.
+Argument 1 is parent unique id for the array/table \, argument 2 is
+the index/parameter number to which the parameter is stored. All parameters
+needs their own index!, f 65;
+#X restore 16 34 pd parameters;
+#X floatatom 25 600 5 0 0 0 - - -;
+#X floatatom 125 600 5 0 0 0 - - -;
+#X floatatom 225 600 5 0 0 0 - - -;
+#X floatatom 325 600 5 0 0 0 - - -;
+#X obj 25 579 r \$0-s-5-param;
+#X obj 125 579 r \$0-s-6-param;
+#X obj 225 579 r \$0-s-7-param;
+#X obj 325 579 r \$0-s-8-param;
+#X text 105 14 <<< Load and save presets from savestate into a table.
+;
+#X text 503 222 So if you want to add more parameters you need to do
+this:, f 42;
+#X obj 158 245 tgl 12 0 \$0-s-5-param \$0-r-5-param empty 17 7 0 10
+-262144 -1 -1 0 1;
+#X obj 178 245 tgl 12 0 \$0-s-6-param \$0-r-6-param empty 17 7 0 10
+-262144 -1 -1 0 1;
+#X obj 161 261 hsl 91 12 0 127 0 0 \$0-s-7-param \$0-r-7-param empty
+-2 -8 0 10 -262144 -1 -1 0 1;
+#X text 118 173 1 >;
+#X text 118 191 2 >;
+#X text 118 209 3 >;
+#X text 118 226 4 >;
+#X text 106 243 5+6 >;
+#X text 118 260 7 >;
+#X obj 158 277 hradio 12 1 0 8 \$0-s-8-param \$0-r-8-param empty 0
+-8 0 10 -262144 -1 -1 1;
+#X text 118 274 8 >;
+#X text 265 172 < Save;
+#X text 265 189 < Copy;
+#X text 503 262 1 Decide how many parameters you need and set that
+number in the message box in the "savestate" abstraction. In this example
+I used 8 parameters., f 42;
+#X text 503 42 The parameters send and receives are formatted like
+this:, f 42;
+#X text 503 362 So thats the basic setup up for the load/save part
+of the system., f 42;
+#X text 503 412 Next is setting up the parameters:, f 42;
+#X text 503 432 3 Create any parameter you like \, toggle \, fader
+\, radio etc., f 42;
+#X text 503 612 Send, f 7;
+#X text 503 632 Receive;
+#X text 563 612 \$0-s-4-param;
+#X text 563 632 \$0-r-4-param;
+#X text 22 493 Parameter receivers. Receives parameter values from
+the parameters \, so you can set the values in you algorithm:, f 67
+;
+#X text 155 76 Load preset after everything has been set., f 24;
+#X text 503 652 (See one of the already existing parameter \, by right
+clicking the parameter and select properties), f 42;
+#X text 503 312 2 In the "savestate" abstraction you also set how many
+presets you want in the multiply object. In this example I used 8 presets.
+, f 42;
+#X text 503 462 4 Then create a "param-savestate" abstraction in the
+"pd parameters" subpatch for every single parameter. You need to set
+the index number that the parameter data is stored in for each parameter.
+Every parameter needs its own index in the table!, f 42;
+#X text 503 552 5 Right click on the parameter(toggle \, fader \, etc.)
+and set the following to the send and receive fields. For parameter
+4 you would put this in send and receive:, f 42;
+#X text 26 673 Made by Jakob Skouborg(Jaffasplaffa) \, August 2021
+;
+#X text 503 13 HOW IT WORKS!, f 42;
+#X text 105 34 <<< Parameter communication with table.;
+#X connect 4 0 6 0;
+#X connect 6 0 2 0;
+#X connect 16 0 12 0;
+#X connect 17 0 13 0;
+#X connect 18 0 14 0;
+#X connect 19 0 15 0;
+#X connect 35 0 31 0;
+#X connect 36 0 32 0;
+#X connect 37 0 33 0;
+#X connect 38 0 34 0;
+#X coords 0 -1 1 1 110 145 2 150 150;
